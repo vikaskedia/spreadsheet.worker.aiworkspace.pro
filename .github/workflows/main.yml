@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: spreadsheet-wroker
 
     steps:
     - name: "Checkout Repository"
