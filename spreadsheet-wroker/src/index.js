@@ -12,4 +12,35 @@ export default {
 	async fetch(request, env, ctx) {
 		return new Response('Hello World from spreadsheet-worker deployment!');
 	},
+	async scheduled(event, env, ctx) {
+		// Runs on cron schedule
+		event.waitUntil(handleCron(env));
+	},
 };
+
+
+async function handleCron(env) {
+  console.log("Cron triggered at", new Date().toISOString());
+  
+  // const apiUrl = "https://spreadsheet.aiworkspace.pro/api/spreadsheet-analysis?workspace_id=686&portfolio_id=portfolio_1754496102288_yzut7nhkn";
+  const apiUrl = "https://spreadsheet.aiworkspace.pro/api/update-spreadsheet";
+  const params = new URLSearchParams({
+	workspace_id: "686",
+	portfolio_id: "portfolio_1754496102288_yzut7nhkn"
+  });
+  const response = await fetch(`${apiUrl}?${params.toString()}`, {
+	method: "GET",
+	headers: {
+	  "Content-Type": "application/html",
+	  // Add any other necessary headers here
+	},
+  });
+
+  if (!response.ok) {
+	console.error("Error calling API:", response.statusText);
+	return;
+  }
+  const result = await response.text();
+  console.log("API call result:", result);
+  return result;
+}
