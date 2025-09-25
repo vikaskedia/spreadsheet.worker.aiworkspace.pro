@@ -1,0 +1,39 @@
+name: Deploy Cloudflare Worker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: "Checkout Repository"
+      uses: actions/checkout@v4
+
+    - name: "Install Dependancies"
+      run: npm install
+
+    - name: Install Cloudflare Workers CLI
+      run: |
+        npm install -g @cloudflare/wrangler
+
+    - name: "Deploy to Cloudflare"
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      run: wrangler deploy
+
+#    - name: Configure Cloudflare Workers CLI
+#      run: |
+#        wrangler config --api-key ${{ secrets.CLOUDFLARE_API_TOKEN }}
+#        wrangler config --email catchall@grmtech.com
+#        wrangler config --account-id d7e36e7a246a40e6da5909c5f1a522c9
+
+#    - name: Publish Cloudflare Worker
+#      run: |
+#        wrangler publish
+
+# Replace YOUR_CLOUDFLARE_EMAIL and YOUR_CLOUDFLARE_ACCOUNT_ID with your Cloudflare account email and account ID.
