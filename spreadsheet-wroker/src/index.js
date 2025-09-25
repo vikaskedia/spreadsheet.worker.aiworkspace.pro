@@ -39,9 +39,10 @@ async function handleCron(env) {
   //const apiUrl = "https://spreadsheet.aiworkspace.pro/api/update-spreadsheet";
   const apiUrl = "https://spreadsheet.aiworkspace.pro/api/spreadsheet-analysis";
   const params = new URLSearchParams({
-	workspace_id: "686",
-	portfolio_id: "portfolio_1754496102288_yzut7nhkn"
+	workspace_id: "309", //"686",
+	portfolio_id:"portfolio_95_1753135771.217412", // "portfolio_1754496102288_yzut7nhkn"
   });
+  
   const response = await fetch(`${apiUrl}?${params.toString()}`, {
 	method: "GET",
 	headers: {
