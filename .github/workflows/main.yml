@@ -14,14 +14,14 @@ jobs:
 
     steps:
     - name: "Checkout Repository"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: "Install Dependancies"
       run: npm install
 
     - name: Install Cloudflare Workers CLI
       run: |
-        npm install -g @cloudflare/wrangler@3.15.0
+        npm install -g @cloudflare/wrangler
 
     - name: "Deploy to Cloudflare"
       env:
