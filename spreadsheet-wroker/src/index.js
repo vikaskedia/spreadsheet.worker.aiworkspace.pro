@@ -21,11 +21,11 @@ export default {
 				break;
 			case "*/10 * * * *":
 				// Every ten minutes
-				await testAPI();
+				await testAPI(env);
 				break;
 			case "0 9 * * *":
 				// Every day at 9 am utc
-				await handleCron();
+				await handleCron(env);
 				break;
 		}
 	},
@@ -62,7 +62,7 @@ async function handleCron(env) {
 
 
 // Example function to run
-async function testAPI() {
+async function testAPI(env) {
   // test cron 
   console.log("Data fetched by cron:");
 }
