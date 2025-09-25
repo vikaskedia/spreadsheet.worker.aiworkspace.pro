@@ -17,7 +17,7 @@ export default {
 		switch (event.cron) {
 			case "*/5 * * * *":
 				// Every five minutes
-				await handleCron(env);
+				await testAPI(env);
 				break;
 			case "*/10 * * * *":
 				// Every ten minutes
@@ -25,7 +25,7 @@ export default {
 				break;
 			case "0 9 * * *":
 				// Every day at 9 am utc
-				await testAPI();
+				await handleCron();
 				break;
 		}
 	},

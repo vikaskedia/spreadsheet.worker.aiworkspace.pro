@@ -19,7 +19,7 @@
 	// ],
 	"triggers": {
 		"crons": [
-			"*/5 * * * *" // Every 5 minutes
+			"0 9 * * *" // Every day at 9 am UTC
 		]
 	},
 	/**
