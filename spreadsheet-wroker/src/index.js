@@ -10,6 +10,6 @@
 
 export default {
 	async fetch(request, env, ctx) {
-		return new Response('Hello World from spreadsheet-worker!');
+		return new Response('Hello World from spreadsheet-worker deployment!');
 	},
 };
