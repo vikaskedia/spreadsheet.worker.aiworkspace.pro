@@ -13,8 +13,21 @@ export default {
 		return new Response('Hello World from spreadsheet-worker deployment!');
 	},
 	async scheduled(event, env, ctx) {
-		// Runs on cron schedule
-		event.waitUntil(handleCron(env));
+		// Runs on cron schedules defined in wrangler.jsonc
+		switch (event.cron) {
+			case "*/5 * * * *":
+				// Every five minutes
+				await handleCron(env);
+				break;
+			case "*/10 * * * *":
+				// Every ten minutes
+				await testAPI();
+				break;
+			case "0 9 * * *":
+				// Every day at 9 am utc
+				await testAPI();
+				break;
+		}
 	},
 };
 
@@ -43,4 +56,11 @@ async function handleCron(env) {
   const result = await response.text();
   console.log("API call result:", result);
   return result;
+}
+
+
+// Example function to run
+async function testAPI() {
+  // test cron 
+  console.log("Data fetched by cron:");
 }
