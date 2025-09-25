@@ -12,10 +12,11 @@
 	},
 	"account_id": "d7e36e7a246a40e6da5909c5f1a522c9",
 	"routes": [
-    {
-      "pattern": "spreadsheet-worker.aiworkspace.pro",
-      "custom_domain": true
-    }
+		{
+		"pattern": "spreadsheet-worker.aiworkspace.pro",
+		"custom_domain": true
+		}
+	],
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
