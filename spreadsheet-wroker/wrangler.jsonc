@@ -11,12 +11,12 @@
 		"enabled": true
 	},
 	"account_id": "d7e36e7a246a40e6da5909c5f1a522c9",
-	"routes": [
-		{
-		"pattern": "spreadsheet.aiworkspace.pro",
-		"custom_domain": true
-		}
-	],
+	// "routes": [
+	// 	{
+	// 	"pattern": "spreadsheet.aiworkspace.pro",
+	// 	"custom_domain": true
+	// 	}
+	// ],
 	"triggers": {
 		"crons": [
 			"*/5 * * * *" // Every 5 minutes
