@@ -21,7 +21,7 @@ jobs:
 
     - name: Install Cloudflare Workers CLI
       run: |
-        npm install -g @cloudflare/wrangler
+        npm install -g wrangler@3.114.14
 
     - name: "Deploy to Cloudflare"
       env:
