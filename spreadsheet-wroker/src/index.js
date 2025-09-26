@@ -55,9 +55,31 @@ async function handleCron(env) {
 	console.error("Error calling API:", response.statusText);
 	return;
   }
+
   const result = await response.text();
+
+  const paramsTwo = new URLSearchParams({
+	workspace_id: "309", //"686",
+	portfolio_id:"portfolio_1757523460330_a9l4dx4qz", // "portfolio_1754496102288_yzut7nhkn"
+  });
+
+  const responseTwo = await fetch(`${apiUrl}?${paramsTwo.toString()}`, {
+	method: "GET",
+	headers: {
+	  "Content-Type": "application/html",
+	  // Add any other necessary headers here
+	},
+  });
+
+  if (!responseTwo.ok) {
+	console.error("Error calling API:", responseTwo.statusText);
+	return;
+  }
+
+  const resultTwo = await responseTwo.text();
   console.log("API call result:", result);
-  return result;
+  console.log("API call result:", resultTwo);
+  return result + "\n" + resultTwo;
 }
 
 
