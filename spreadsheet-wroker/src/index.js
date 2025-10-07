@@ -23,20 +23,55 @@ export default {
 				// Every ten minutes
 				await testAPI(env);
 				break;
+			case "0 8 * * *":
+				// Every day at 8 am utc
+				await handleSpreadsheetUpdateCron(env);
+				break;
 			case "0 9 * * *":
 				// Every day at 9 am utc
-				await handleCron(env);
+				await handleSpreadsheetAnalysisCron(env);
 				break;
 		}
 	},
 };
 
 
-async function handleCron(env) {
+//update-spreadsheet?workspace_id=686&portfolio_id=portfolio_1754496102288_yzut7nhkn
+async function handleSpreadsheetUpdateCron(env) {
+  console.log("Cron triggered at", new Date().toISOString());
+  
+  //const apiUrl = "https://spreadsheet.aiworkspace.pro/api/update-spreadsheet?workspace_id=686&portfolio_id=portfolio_1754496102288_yzut7nhkn";
+  const apiUrl = "https://spreadsheet.aiworkspace.pro/api/update-spreadsheet";
+  const params = new URLSearchParams({
+	workspace_id: "686",
+	portfolio_id: "portfolio_1754496102288_yzut7nhkn"
+  });
+  
+  const response = await fetch(`${apiUrl}?${params.toString()}`, {
+	method: "GET",
+	headers: {
+	  "Content-Type": "application/html",
+	  // Add any other necessary headers here
+	},
+  });
+
+  if (!response.ok) {
+	console.error("Error calling API:", response.statusText);
+	return;
+  }
+
+  const result = await response.text();
+
+  console.log("API call result:", result);
+  return result;
+}
+
+
+
+async function handleSpreadsheetAnalysisCron(env) {
   console.log("Cron triggered at", new Date().toISOString());
   
   //const apiUrl = "https://spreadsheet.aiworkspace.pro/api/spreadsheet-analysis?workspace_id=686&portfolio_id=portfolio_1754496102288_yzut7nhkn";
-  //const apiUrl = "https://spreadsheet.aiworkspace.pro/api/update-spreadsheet";
   const apiUrl = "https://spreadsheet.aiworkspace.pro/api/spreadsheet-analysis";
   const params = new URLSearchParams({
 	workspace_id: "309", //"686",
