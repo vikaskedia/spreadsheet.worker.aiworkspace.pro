@@ -92,6 +92,7 @@ async function handleSpreadsheetAnalysisCron(env) {
   }
 
   const result = await response.text();
+  console.log("API call result:", result);
 
   const paramsTwo = new URLSearchParams({
 	workspace_id: "309", //"686",
@@ -112,9 +113,31 @@ async function handleSpreadsheetAnalysisCron(env) {
   }
 
   const resultTwo = await responseTwo.text();
-  console.log("API call result:", result);
   console.log("API call result:", resultTwo);
-  return result + "\n" + resultTwo;
+
+
+  const paramsThree = new URLSearchParams({
+	workspace_id: "309", //"686",
+	portfolio_id: "portfolio_1759426601704_tb7dyjp4q", //"portfolio_1757523460330_a9l4dx4qz", // "portfolio_1754496102288_yzut7nhkn"
+  });
+
+  const responseThree = await fetch(`${apiUrl}?${paramsThree.toString()}`, {
+	method: "GET",
+	headers: {
+	  "Content-Type": "application/html",
+	  // Add any other necessary headers here
+	},
+  });
+
+  if (!responseThree.ok) {
+	console.error("Error calling API:", responseThree.statusText);
+	return;
+  }
+
+  const resultThree = await responseThree.text();
+  console.log("API call result:", resultThree);
+
+  return result + "\n" + resultTwo + "\n" + resultThree;
 }
 
 
